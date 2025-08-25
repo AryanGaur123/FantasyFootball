@@ -40,15 +40,28 @@ const Header: React.FC = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="header-content">
-        <div className="header-left">
-          <div className="logo">
-            <Trophy className="logo-icon" />
-            <div className="logo-text">
-              <h1 className="gradient-text">Fantasy25</h1>
-              {league && (
-                <p className="league-name">{league.name}</p>
-              )}
+        <div className="header-top">
+          <div className="header-left">
+            <div className="logo">
+              <Trophy className="logo-icon" />
+              <div className="logo-text">
+                <h1 className="gradient-text">Fantasy25</h1>
+                {league && (
+                  <p className="league-name">{league.name}</p>
+                )}
+              </div>
             </div>
+          </div>
+
+          <div className="header-right">
+            {loading ? (
+              <div className="spinner" />
+            ) : (
+              <div className="league-info">
+                <span className="season"></span>
+                <span className="teams-count"></span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -77,17 +90,6 @@ const Header: React.FC = () => {
             );
           })}
         </nav>
-
-        <div className="header-right">
-          {loading ? (
-            <div className="spinner" />
-          ) : (
-            <div className="league-info">
-              <span className="season">2025 Season</span>
-              <span className="teams-count">{league?.total_rosters || 0} Teams</span>
-            </div>
-          )}
-        </div>
       </div>
     </motion.header>
   );
