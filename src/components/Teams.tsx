@@ -24,19 +24,19 @@ const Teams: React.FC = () => {
     }
   }, [selectedTeam, users, players]);
 
-  // Auto-scroll to analysis when it loads
+  // Auto-scroll to team details when team is selected
   useEffect(() => {
-    if (aiAnalysis) {
-      // Scroll to the analysis section
-      const analysisElement = document.querySelector('.team-analysis');
-      if (analysisElement) {
-        analysisElement.scrollIntoView({ 
+    if (selectedTeam) {
+      // Scroll to the team details section
+      const teamDetailsElement = document.querySelector('.team-details');
+      if (teamDetailsElement) {
+        teamDetailsElement.scrollIntoView({ 
           behavior: 'smooth', 
           block: 'start' 
         });
       }
     }
-  }, [aiAnalysis]);
+  }, [selectedTeam]);
 
   const fetchTeamData = async () => {
     try {
@@ -158,8 +158,6 @@ const Teams: React.FC = () => {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => {
                     setSelectedTeam(roster);
-                    // Auto-scroll to the top of the page when a team is selected
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
                   <div className="team-header">
