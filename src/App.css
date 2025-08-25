@@ -6,7 +6,7 @@
 
 .main-content {
   flex: 1;
-  padding: 24px;
+  padding: 16px;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -14,13 +14,13 @@
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 12px;
+    padding: 8px;
   }
 }
 
 @media (max-width: 480px) {
   .main-content {
-    padding: 8px;
+    padding: 6px;
   }
 }
 
