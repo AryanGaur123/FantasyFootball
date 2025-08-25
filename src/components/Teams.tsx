@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Search, Brain, User, Trophy, Target } from 'lucide-react';
+import { Users, Search, Brain, User, Trophy, Target, ArrowUp } from 'lucide-react';
 import { fantasyAPI } from '../services/api';
 import { User as UserType, Roster, Player, AIAnalysis } from '../types';
 import './Teams.css';
@@ -23,6 +23,20 @@ const Teams: React.FC = () => {
       generateTeamAnalysis(selectedTeam);
     }
   }, [selectedTeam, users, players]);
+
+  // Auto-scroll to analysis when it loads
+  useEffect(() => {
+    if (aiAnalysis) {
+      // Scroll to the analysis section
+      const analysisElement = document.querySelector('.team-analysis');
+      if (analysisElement) {
+        analysisElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }
+  }, [aiAnalysis]);
 
   const fetchTeamData = async () => {
     try {
@@ -142,7 +156,11 @@ const Teams: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  onClick={() => setSelectedTeam(roster)}
+                  onClick={() => {
+                    setSelectedTeam(roster);
+                    // Auto-scroll to the top of the page when a team is selected
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                 >
                   <div className="team-header">
                     <div className="team-rank">#{index + 1}</div>
